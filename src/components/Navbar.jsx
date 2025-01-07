@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import Image from "./Image";
 import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 export default function Navbar() {
 	const [open, setOpen] = React.useState(false);
@@ -43,11 +44,16 @@ export default function Navbar() {
 				<Link to="/">Trending</Link>
 				<Link to="/">Most Popular</Link>
 				<Link to="/">About</Link>
-				<Link to="/">
-					<button className="text-white bg-blue-500 px-4 py-2 rounded-md cursor-pointer">
-						Login
-					</button>
-				</Link>
+				<SignedOut>
+					<Link to="/login">
+						<button className="text-white bg-blue-500 px-4 py-2 rounded-md cursor-pointer">
+							Login
+						</button>
+					</Link>
+				</SignedOut>
+				<SignedIn>
+					<UserButton />
+				</SignedIn>
 			</div>
 		</div>
 	);
