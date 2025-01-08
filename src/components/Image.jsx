@@ -12,6 +12,12 @@ export default function Image({ src, w, h, alt, className }) {
 			height={h}
 			loading="lazy"
 			lqip={{ active: true, quality: 20 }}
+			transformation={[
+				{
+					height: h,
+					width: w,
+				},
+			]}
 		/>
 	);
 }
