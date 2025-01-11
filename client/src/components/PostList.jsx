@@ -54,8 +54,8 @@ export default function PostList() {
 				</p>
 			}>
 			{allPosts.map((post) => (
-				// <PostListItem key={post._id} post={post} />
-                "Posts will be displayed here"
+				<PostListItem key={post._id} post={post} />
+				// "something will be here."
 			))}
 		</InfiniteScroll>
 	);

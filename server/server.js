@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 
 import connectDB from "./db/connectDB.js";
 
@@ -11,6 +12,7 @@ import { clerkMiddleware, requireAuth } from "@clerk/express";
 import cors from "cors";
 
 const app = express();
+dotenv.config();
 
 app.use(cors(process.env.CLIENT_URL));
 app.use(clerkMiddleware());

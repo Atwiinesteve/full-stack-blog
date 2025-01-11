@@ -1,6 +1,10 @@
 import User from "../models/user.model.js";
 
-export const getUserSavedPosts = async (req, res) => {
+
+// =====================
+// Get user saved posts.
+// =====================
+export async function getUserSavedPosts (req, res) {
   const clerkUserId = req.auth.userId;
 
   if (!clerkUserId) {
@@ -12,7 +16,11 @@ export const getUserSavedPosts = async (req, res) => {
   res.status(200).json(user.savedPosts);
 };
 
-export const savePost = async (req, res) => {
+
+// ================
+// Save post.
+// ================
+export async function savePost (req, res) {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
 

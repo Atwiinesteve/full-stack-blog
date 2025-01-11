@@ -1,6 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.snow.css";
+// import "react-quill-new/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -54,6 +55,7 @@ export default function Write() {
 		return <div className="">You should login!</div>;
 	}
 
+	// Handle form submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
@@ -103,7 +105,7 @@ export default function Write() {
 					</select>
 				</div>
 				<textarea
-					className="p-4 rounded-xl bg-white shadow-md"
+					className="p-4 rounded-xl bg-blue shadow-md"
 					name="desc"
 					placeholder="A Short Description"
 				/>
@@ -134,4 +136,4 @@ export default function Write() {
 			</form>
 		</div>
 	);
-};
+}

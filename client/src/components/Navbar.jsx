@@ -11,7 +11,7 @@ export default function Navbar() {
 		<div className="w-full h-16 md:h-20 flex justify-between items-center">
 			{/* LOGO */}
 			<Link to={"/"} className="flex items-center gap-4 text-2xl font-bold">
-				<Image alt="lama logo" h={32} w={32} src="logo.png" />
+				<Image alt="lama logo" h={32} w={32} src={`logo.png` || null} />
 				<span>laMaLogo</span>
 			</Link>
 			{/* MOBILE MENU */}

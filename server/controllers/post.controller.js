@@ -1,7 +1,15 @@
 import ImageKit from "imagekit";
+import dotenv from "dotenv";
+
+
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
+dotenv.config()
+
+// ===============
+// Get posts.
+// ===============
 export const getPosts = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 2;
@@ -74,6 +82,10 @@ export const getPosts = async (req, res) => {
   res.status(200).json({ posts, hasMore });
 };
 
+
+// ===============
+// Get single post.
+// ===============
 export const getPost = async (req, res) => {
   const post = await Post.findOne({ slug: req.params.slug }).populate(
     "user",
@@ -82,6 +94,10 @@ export const getPost = async (req, res) => {
   res.status(200).json(post);
 };
 
+
+// ===============
+// Create post.
+// ===============
 export const createPost = async (req, res) => {
   const clerkUserId = req.auth.userId;
 
@@ -94,7 +110,7 @@ export const createPost = async (req, res) => {
   const user = await User.findOne({ clerkUserId });
 
   if (!user) {
-    return res.status(404).json("User not found!");
+    return res.status(400).json("User not found!");
   }
 
   let slug = req.body.title.replace(/ /g, "-").toLowerCase();
@@ -115,6 +131,10 @@ export const createPost = async (req, res) => {
   res.status(200).json(post);
 };
 
+
+// ===============
+// Delete post.
+// ===============
 export const deletePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
 
@@ -143,6 +163,10 @@ export const deletePost = async (req, res) => {
   res.status(200).json("Post has been deleted");
 };
 
+
+// ===============
+// Feature post.
+// ===============
 export const featurePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
@@ -176,12 +200,20 @@ export const featurePost = async (req, res) => {
   res.status(200).json(updatedPost);
 };
 
+
+// ===============
+// ImageKit.
+// ===============
 const imagekit = new ImageKit({
-  urlEndpoint: process.env.IK_URL_ENDPOINT,
-  publicKey: process.env.IK_PUBLIC_KEY,
-  privateKey: process.env.IK_PRIVATE_KEY,
+  urlEndpoint: process.env.VITE_IMAGEKIT_URL_ENDPOINT,
+  publicKey: process.env.VITE_IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env.VITE_IMAGEKIT_PRIVATE_KEY,
 });
 
+
+// ===============
+// Upload auth.
+// ===============
 export const uploadAuth = async (req, res) => {
   const result = imagekit.getAuthenticationParameters();
   res.send(result);
